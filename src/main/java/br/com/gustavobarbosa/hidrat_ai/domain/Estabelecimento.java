@@ -1,7 +1,6 @@
 package br.com.gustavobarbosa.hidrat_ai.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,9 +9,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
 @Table(name = "estabelecimentos")
@@ -33,7 +31,6 @@ public class Estabelecimento {
     @Column(nullable = false)
     private String senha;
 
-    @Size(min= 11, max = 14)
     @Column(name = "cpf_cnpj", nullable = false, length = 14, unique = true)
     private String cpfCnpj;
 
