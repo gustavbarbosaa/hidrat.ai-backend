@@ -2,6 +2,7 @@ package br.com.gustavobarbosa.hidrat_ai.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -41,4 +42,9 @@ public class Estabelecimento {
     @UpdateTimestamp
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
+
+    @Builder.Default
+    @Column(nullable = false)
+    @ColumnDefault("true")
+    private boolean ativo = true;
 }
