@@ -1,6 +1,7 @@
 package br.com.gustavobarbosa.hidrat_ai.controllers;
 
-import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoCriacaoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoEdicaoRequest;
 import br.com.gustavobarbosa.hidrat_ai.dto.response.EstabelecimentoResponse;
 import br.com.gustavobarbosa.hidrat_ai.services.EstabelecimentoService;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,19 @@ public class EstabelecimentoController {
     }
 
     @PostMapping
-    public ResponseEntity<EstabelecimentoResponse> cadastrar(@RequestBody EstabelecimentoRequest request) {
+    public ResponseEntity<EstabelecimentoResponse> cadastrar(@RequestBody EstabelecimentoCriacaoRequest request) {
         return ResponseEntity.ok().body(estabelecimentoService.cadastrar(request));
     }
 
     @PutMapping("/{id}/desativar")
     public ResponseEntity<EstabelecimentoResponse> desativar(@PathVariable UUID id) {
         return ResponseEntity.ok().body(estabelecimentoService.desativar(id));
+    }
+
+    @PutMapping("/{id}/editar")
+    public ResponseEntity<EstabelecimentoResponse> editar(
+            @RequestBody EstabelecimentoEdicaoRequest request,
+            @PathVariable UUID id) {
+        return ResponseEntity.ok().body(estabelecimentoService.editar(request, id));
     }
 }

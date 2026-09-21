@@ -1,7 +1,8 @@
 package br.com.gustavobarbosa.hidrat_ai.services;
 
 import br.com.gustavobarbosa.hidrat_ai.domain.Estabelecimento;
-import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoCriacaoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoEdicaoRequest;
 import br.com.gustavobarbosa.hidrat_ai.dto.response.EstabelecimentoResponse;
 import br.com.gustavobarbosa.hidrat_ai.exceptions.RecursoJaExistenteException;
 import br.com.gustavobarbosa.hidrat_ai.exceptions.RecursoNaoEncontradoException;
@@ -40,7 +41,7 @@ public class EstabelecimentoService {
                 .toList();
     }
 
-    public EstabelecimentoResponse cadastrar(@Valid EstabelecimentoRequest request) {
+    public EstabelecimentoResponse cadastrar(@Valid EstabelecimentoCriacaoRequest request) {
         Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(request.email()).orElse(null);
 
         if (estabelecimento != null) {
@@ -50,6 +51,17 @@ public class EstabelecimentoService {
         estabelecimento = estabelecimentoMapper.paraEntidade(request);
 
         estabelecimento = estabelecimentoRepository.save(estabelecimento);
+
+        return estabelecimentoMapper.paraResponse(estabelecimento);
+    }
+
+    public EstabelecimentoResponse editar(@Valid EstabelecimentoEdicaoRequest request, UUID id) {
+        Estabelecimento estabelecimento = buscaEstabelecimento(id);
+
+        estabelecimento.setNome(request.nome());
+        estabelecimento.setApelido(request.apelido());
+        estabelecimento.setEmail(request.email());
+        estabelecimento.setCpfCnpj(request.cpfCnpj());
 
         return estabelecimentoMapper.paraResponse(estabelecimento);
     }
