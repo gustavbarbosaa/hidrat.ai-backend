@@ -6,20 +6,20 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record EstabelecimentoRequest(
-        @NotBlank(message = "O campo nome È obrigatÛrio.")
-        @Size(max = 100, message = "O campo nome deve ter no m·ximo 100 caracteres.")
+        @NotBlank(message = "O campo nome √© obrigat√≥rio.")
+        @Size(max = 100, message = "O campo nome deve ter no m√°ximo 100 caracteres.")
         String nome,
-        @NotBlank(message = "O campo apelido È obrigatÛrio.")
-        @Size(max = 100, message = "O campo apelido deve ter no m·ximo 100 caracteres.")
+        @NotBlank(message = "O campo apelido √© obrigat√≥rio.")
+        @Size(max = 100, message = "O campo apelido deve ter no m√°ximo 100 caracteres.")
         String apelido,
-        @NotBlank(message = "O campo email È obrigatÛrio.")
-        @Size(max = 100, message = "O campo email deve ter no m·ximo 100 caracteres.")
-        @Email(message = "O e-mail informado È inv·lido.")
+        @NotBlank(message = "O campo email √© obrigat√≥rio.")
+        @Size(max = 100, message = "O campo email deve ter no m√°ximo 100 caracteres.")
+        @Email(message = "O e-mail informado √© inv√°lido.")
         String email,
-        @NotBlank(message = "O campo senha È obrigatÛrio.")
+        @NotBlank(message = "O campo senha √© obrigat√≥rio.")
         @Size(min = 8, max = 100, message = "A senha deve ter entre 8 a 100 caracteres.")
         String senha,
-        @NotBlank(message = "O campo CPF/CNPJ È obrigatÛrio.")
+        @NotBlank(message = "O campo CPF/CNPJ √© obrigat√≥rio.")
         @CpfOuCnpj
         String cpfCnpj
 ) { }

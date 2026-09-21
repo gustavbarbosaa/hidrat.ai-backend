@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ProblemDetail tratarRecursoNaoEncontrado(RecursoNaoEncontradoException exception) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        problemDetail.setTitle("Recurso n„o encontrado.");
+        problemDetail.setTitle("Recurso n√£o encontrado.");
         problemDetail.setDetail(exception.getMessage());
 
         return problemDetail;

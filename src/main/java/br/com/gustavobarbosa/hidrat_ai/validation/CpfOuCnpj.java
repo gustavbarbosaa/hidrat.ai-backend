@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.RECORD_COMPONENT, ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CpfOuCnpj {
-    String message() default "CPF ou CNPJ inv·lido";
+    String message() default "CPF ou CNPJ inv√°lido";
 
     Class<?>[] groups() default {};
 
