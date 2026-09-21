@@ -47,4 +47,7 @@ public class Estabelecimento {
     @Column(nullable = false)
     @ColumnDefault("true")
     private boolean ativo = true;
+
+    @Column(name = "desativado_em")
+    private LocalDateTime desativadoEm;
 }
