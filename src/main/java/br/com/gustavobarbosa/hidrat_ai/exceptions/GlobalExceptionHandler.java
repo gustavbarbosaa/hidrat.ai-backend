@@ -15,4 +15,13 @@ public class GlobalExceptionHandler {
 
         return problemDetail;
     }
+
+    @ExceptionHandler(RecursoJaExistenteException.class)
+    public ProblemDetail tratarRecursoJaExistente(RecursoJaExistenteException exception) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+        problemDetail.setTitle("Recurso já existente.");
+        problemDetail.setDetail(exception.getMessage());
+
+        return problemDetail;
+    }
 }
