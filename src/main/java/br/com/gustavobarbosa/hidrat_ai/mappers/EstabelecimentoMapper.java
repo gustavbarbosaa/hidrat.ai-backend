@@ -11,7 +11,8 @@ public class EstabelecimentoMapper {
         return new EstabelecimentoResponse(
                 estabelecimento.getId(),
                 estabelecimento.getNome(),
-                estabelecimento.getApelido()
+                estabelecimento.getApelido(),
+                estabelecimento.isAtivo()
         );
     }
 
