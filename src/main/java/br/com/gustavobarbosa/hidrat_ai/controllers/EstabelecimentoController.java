@@ -30,4 +30,9 @@ public class EstabelecimentoController {
     public ResponseEntity<EstabelecimentoResponse> cadastrar(@RequestBody EstabelecimentoRequest request) {
         return ResponseEntity.ok().body(estabelecimentoService.cadastrar(request));
     }
+
+    @PutMapping("/{id}/desativar")
+    public ResponseEntity<EstabelecimentoResponse> desativar(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(estabelecimentoService.desativar(id));
+    }
 }

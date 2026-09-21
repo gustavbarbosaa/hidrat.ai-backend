@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +50,15 @@ public class EstabelecimentoService {
         estabelecimento = estabelecimentoMapper.paraEntidade(request);
 
         estabelecimento = estabelecimentoRepository.save(estabelecimento);
+
+        return estabelecimentoMapper.paraResponse(estabelecimento);
+    }
+
+    public EstabelecimentoResponse desativar(UUID id) {
+        Estabelecimento estabelecimento = buscaEstabelecimento(id);
+
+        estabelecimento.setAtivo(false);
+        estabelecimento.setDesativadoEm(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         return estabelecimentoMapper.paraResponse(estabelecimento);
     }
