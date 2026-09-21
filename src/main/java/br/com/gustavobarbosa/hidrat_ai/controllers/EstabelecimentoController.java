@@ -1,5 +1,6 @@
 package br.com.gustavobarbosa.hidrat_ai.controllers;
 
+import br.com.gustavobarbosa.hidrat_ai.dto.request.EstabelecimentoRequest;
 import br.com.gustavobarbosa.hidrat_ai.dto.response.EstabelecimentoResponse;
 import br.com.gustavobarbosa.hidrat_ai.services.EstabelecimentoService;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,10 @@ public class EstabelecimentoController {
     @GetMapping("ativos")
     public ResponseEntity<List<EstabelecimentoResponse>> buscarAtivos() {
         return ResponseEntity.ok().body(estabelecimentoService.buscarAtivos());
+    }
+
+    @PostMapping
+    public ResponseEntity<EstabelecimentoResponse> cadastrar(@RequestBody EstabelecimentoRequest request) {
+        return ResponseEntity.ok().body(estabelecimentoService.cadastrar(request));
     }
 }
