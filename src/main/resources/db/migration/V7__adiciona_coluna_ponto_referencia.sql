@@ -1,0 +1,1 @@
+ALTER TABLE clientes ADD COLUMN ponto_referencia VARCHAR(255);
