@@ -8,6 +8,7 @@ import br.com.gustavobarbosa.hidrat_ai.exceptions.RecursoJaExistenteException;
 import br.com.gustavobarbosa.hidrat_ai.exceptions.RecursoNaoEncontradoException;
 import br.com.gustavobarbosa.hidrat_ai.mappers.EstabelecimentoMapper;
 import br.com.gustavobarbosa.hidrat_ai.repositories.EstabelecimentoRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class EstabelecimentoService {
                 .toList();
     }
 
+    @Transactional
     public EstabelecimentoResponse cadastrar(@Valid EstabelecimentoCriacaoRequest request) {
         Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(request.email()).orElse(null);
 
@@ -55,6 +57,7 @@ public class EstabelecimentoService {
         return estabelecimentoMapper.paraResponse(estabelecimento);
     }
 
+    @Transactional
     public EstabelecimentoResponse editar(@Valid EstabelecimentoEdicaoRequest request, UUID id) {
         Estabelecimento estabelecimento = buscaEstabelecimento(id);
 
@@ -66,6 +69,7 @@ public class EstabelecimentoService {
         return estabelecimentoMapper.paraResponse(estabelecimento);
     }
 
+    @Transactional
     public EstabelecimentoResponse desativar(UUID id) {
         Estabelecimento estabelecimento = buscaEstabelecimento(id);
 
