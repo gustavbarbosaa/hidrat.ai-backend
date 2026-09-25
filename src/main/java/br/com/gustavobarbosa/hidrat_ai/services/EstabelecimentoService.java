@@ -72,6 +72,8 @@ public class EstabelecimentoService {
         estabelecimento.setAtivo(false);
         estabelecimento.setDesativadoEm(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
+        estabelecimento = estabelecimentoRepository.save(estabelecimento);
+
         return estabelecimentoMapper.paraResponse(estabelecimento);
     }
 
