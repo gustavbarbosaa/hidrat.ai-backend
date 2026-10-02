@@ -33,6 +33,10 @@ public class Cliente {
     @Embedded
     private Endereco endereco;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estabelecimento_id")
+    private Estabelecimento estabelecimento;
+
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;
