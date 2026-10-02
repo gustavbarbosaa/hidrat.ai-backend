@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class ClienteMapper {
     public ClienteDTO paraDTO(Cliente cliente) {
         return new ClienteDTO(
+                cliente.getId(),
                 cliente.getNome(),
                 cliente.getApelido(),
                 cliente.getContato(),

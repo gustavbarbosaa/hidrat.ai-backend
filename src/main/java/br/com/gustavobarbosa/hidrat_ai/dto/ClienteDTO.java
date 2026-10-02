@@ -4,7 +4,10 @@ import br.com.gustavobarbosa.hidrat_ai.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 public record ClienteDTO(
+    UUID id,
     @NotBlank(message = "O campo nome é obrigatório.")
     @Size(max = 100, message = "O campo nome deve ter no máximo 100 caracteres.")
     String nome,
