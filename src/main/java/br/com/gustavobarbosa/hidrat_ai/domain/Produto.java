@@ -29,11 +29,9 @@ public class Produto {
     @Column(length = 100)
     private String marca;
 
-    @Positive
     @Column(name = "valor_recarga", nullable = false)
     private BigDecimal valorRecarga;
 
-    @Positive
     @Column(name = "valor_com_vasilhame", nullable = false)
     private BigDecimal valorComVasilhame;
 
