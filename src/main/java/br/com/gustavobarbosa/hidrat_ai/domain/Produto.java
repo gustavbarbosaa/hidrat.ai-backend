@@ -41,6 +41,10 @@ public class Produto {
     @Column(name = "validade")
     private LocalDateTime validade;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estabelecimento_id", nullable = false)
+    private Estabelecimento estabelecimento;
+
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;

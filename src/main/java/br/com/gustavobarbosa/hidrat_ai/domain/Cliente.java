@@ -34,7 +34,7 @@ public class Cliente {
     private Endereco endereco;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estabelecimento_id")
+    @JoinColumn(name = "estabelecimento_id", nullable = false)
     private Estabelecimento estabelecimento;
 
     @CreationTimestamp
