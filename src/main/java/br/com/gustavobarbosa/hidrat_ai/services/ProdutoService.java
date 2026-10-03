@@ -1,9 +1,12 @@
 package br.com.gustavobarbosa.hidrat_ai.services;
 
+import br.com.gustavobarbosa.hidrat_ai.domain.Estabelecimento;
 import br.com.gustavobarbosa.hidrat_ai.domain.Produto;
-import br.com.gustavobarbosa.hidrat_ai.dto.ProdutoDTO;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.ProdutoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.response.ProdutoResponse;
 import br.com.gustavobarbosa.hidrat_ai.exceptions.RecursoNaoEncontradoException;
 import br.com.gustavobarbosa.hidrat_ai.mappers.ProdutoMapper;
+import br.com.gustavobarbosa.hidrat_ai.repositories.EstabelecimentoRepository;
 import br.com.gustavobarbosa.hidrat_ai.repositories.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -19,17 +22,19 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProdutoService {
     private static final String PRODUTO_NAO_ENCONTRADO = "Produto não encontrado.";
+    private static final String ESTABELECIMENTO_NAO_ENCONTRADO = "Estabelecimento não encontrado.";
 
     private final ProdutoRepository produtoRepository;
+    private final EstabelecimentoRepository estabelecimentoRepository;
     private final ProdutoMapper produtoMapper;
 
-    public ProdutoDTO buscarPorId(UUID id) {
+    public ProdutoResponse buscarPorId(UUID id) {
         Produto produto = buscarProduto(id);
 
         return produtoMapper.paraDTO(produto);
     }
 
-    public List<ProdutoDTO> buscarAtivos() {
+    public List<ProdutoResponse> buscarAtivos() {
         List<Produto> produtos = produtoRepository.findAllByAtivoTrue();
 
         return produtos
@@ -39,8 +44,11 @@ public class ProdutoService {
     }
 
     @Transactional
-    public ProdutoDTO cadastrar(@Valid ProdutoDTO request) {
-        Produto produto = produtoMapper.paraEntidade(request);
+    public ProdutoResponse cadastrar(@Valid ProdutoRequest request) {
+        Estabelecimento estabelecimento = estabelecimentoRepository.findById(request.estabelecimentoId())
+                .orElseThrow(() -> new RecursoNaoEncontradoException(ESTABELECIMENTO_NAO_ENCONTRADO));
+
+        Produto produto = produtoMapper.paraEntidade(request, estabelecimento);
 
         produto = produtoRepository.save(produto);
 
@@ -48,14 +56,18 @@ public class ProdutoService {
     }
 
     @Transactional
-    public ProdutoDTO editar(@Valid ProdutoDTO request, UUID id) {
+    public ProdutoResponse editar(@Valid ProdutoRequest request, UUID id) {
         Produto produto = buscarProduto(id);
+
+        Estabelecimento estabelecimento = estabelecimentoRepository.findById(request.estabelecimentoId())
+                .orElseThrow(() -> new RecursoNaoEncontradoException(ESTABELECIMENTO_NAO_ENCONTRADO));
 
         produto.setNome(request.nome());
         produto.setMarca(request.marca());
         produto.setValorRecarga(request.valorRecarga());
         produto.setValorComVasilhame(request.valorComVasilhame());
         produto.setValidade(request.validade());
+        produto.setEstabelecimento(estabelecimento);
 
         produto = produtoRepository.save(produto);
 
@@ -63,7 +75,7 @@ public class ProdutoService {
     }
 
     @Transactional
-    public ProdutoDTO desativar(UUID id) {
+    public ProdutoResponse desativar(UUID id) {
         Produto produto = buscarProduto(id);
 
         produto.setAtivo(false);

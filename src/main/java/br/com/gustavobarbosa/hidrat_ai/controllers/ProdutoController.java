@@ -1,7 +1,7 @@
 package br.com.gustavobarbosa.hidrat_ai.controllers;
 
-import br.com.gustavobarbosa.hidrat_ai.dto.ClienteDTO;
-import br.com.gustavobarbosa.hidrat_ai.dto.ProdutoDTO;
+import br.com.gustavobarbosa.hidrat_ai.dto.request.ProdutoRequest;
+import br.com.gustavobarbosa.hidrat_ai.dto.response.ProdutoResponse;
 import br.com.gustavobarbosa.hidrat_ai.services.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,28 +17,28 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> buscaPorId(@PathVariable UUID id) {
+    public ResponseEntity<ProdutoResponse> buscaPorId(@PathVariable UUID id) {
         return ResponseEntity.ok().body(produtoService.buscarPorId(id));
     }
 
     @GetMapping("ativos")
-    public ResponseEntity<List<ProdutoDTO>> buscarAtivos() {
+    public ResponseEntity<List<ProdutoResponse>> buscarAtivos() {
         return ResponseEntity.ok().body(produtoService.buscarAtivos());
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO request) {
+    public ResponseEntity<ProdutoResponse> cadastrar(@RequestBody ProdutoRequest request) {
         return ResponseEntity.ok().body(produtoService.cadastrar(request));
     }
 
     @PutMapping("/{id}/desativar")
-    public ResponseEntity<ProdutoDTO> desativar(@PathVariable UUID id) {
+    public ResponseEntity<ProdutoResponse> desativar(@PathVariable UUID id) {
         return ResponseEntity.ok().body(produtoService.desativar(id));
     }
 
     @PutMapping("/{id}/editar")
-    public ResponseEntity<ProdutoDTO> editar(
-            @RequestBody ProdutoDTO request,
+    public ResponseEntity<ProdutoResponse> editar(
+            @RequestBody ProdutoRequest request,
             @PathVariable UUID id) {
         return ResponseEntity.ok().body(produtoService.editar(request, id));
     }
