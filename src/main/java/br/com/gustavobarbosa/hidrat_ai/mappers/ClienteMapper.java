@@ -18,7 +18,7 @@ public class ClienteMapper {
                 cliente.getNome(),
                 cliente.getApelido(),
                 cliente.getContato(),
-                estabelecimentoMapper.paraResponse(cliente.getEstabelecimento()),
+                estabelecimentoMapper.paraDTO(cliente.getEstabelecimento()),
                 cliente.getEndereco()
         );
     }

@@ -30,7 +30,7 @@ public class EstabelecimentoService {
     public EstabelecimentoResponse buscarPorId(UUID id) {
         Estabelecimento estabelecimento = buscaEstabelecimento(id);
 
-        return estabelecimentoMapper.paraResponse(estabelecimento);
+        return estabelecimentoMapper.paraDTO(estabelecimento);
     }
 
     public List<EstabelecimentoResponse> buscarAtivos() {
@@ -38,7 +38,7 @@ public class EstabelecimentoService {
 
         return estabelecimentosAtivos
                 .stream()
-                .map(estabelecimentoMapper::paraResponse)
+                .map(estabelecimentoMapper::paraDTO)
                 .toList();
     }
 
@@ -54,7 +54,7 @@ public class EstabelecimentoService {
 
         estabelecimento = estabelecimentoRepository.save(estabelecimento);
 
-        return estabelecimentoMapper.paraResponse(estabelecimento);
+        return estabelecimentoMapper.paraDTO(estabelecimento);
     }
 
     @Transactional
@@ -66,7 +66,7 @@ public class EstabelecimentoService {
         estabelecimento.setEmail(request.email());
         estabelecimento.setCpfCnpj(request.cpfCnpj());
 
-        return estabelecimentoMapper.paraResponse(estabelecimento);
+        return estabelecimentoMapper.paraDTO(estabelecimento);
     }
 
     @Transactional
@@ -78,7 +78,7 @@ public class EstabelecimentoService {
 
         estabelecimento = estabelecimentoRepository.save(estabelecimento);
 
-        return estabelecimentoMapper.paraResponse(estabelecimento);
+        return estabelecimentoMapper.paraDTO(estabelecimento);
     }
 
     private Estabelecimento buscaEstabelecimento(UUID id) {

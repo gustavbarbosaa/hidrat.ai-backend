@@ -19,7 +19,7 @@ public class ProdutoMapper {
                 produto.getMarca(),
                 produto.getValorRecarga(),
                 produto.getValorComVasilhame(),
-                estabelecimentoMapper.paraResponse(produto.getEstabelecimento()),
+                estabelecimentoMapper.paraDTO(produto.getEstabelecimento()),
                 produto.getValidade()
         );
     }
